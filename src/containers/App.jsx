@@ -4,6 +4,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import Route from '../components/Route/Route';
 import HomeComponent from './Home/Home';
 import { history } from '../redux/store';
+import LoginComponent from './Auth/Login/Login';
+import RegisterComponent from './Auth/Register/Register';
 
 export default class App extends Component {
 	render() {
@@ -12,6 +14,8 @@ export default class App extends Component {
 				<ConnectedRouter history={history}>
 					<Switch>
 						<Route path="/" name="Home" component={HomeComponent}/>
+						<Route path="/login" name="Login" component={LoginComponent}/>
+						<Route path="/register" name="Register" component={RegisterComponent}/>
 					</Switch>
 				</ConnectedRouter>
 			</Fragment>

@@ -29,7 +29,9 @@
 		"react-redux": "^6.0.0",
 		"react-router": "^4.3.1",
 		"react-router-dom": "^4.3.1",
+		"reactstrap": "^7.0.2",
 		"redux": "^4.0.1",
+		"redux-form": "^8.1.0",
 		"redux-logger": "^3.0.6",
 		"redux-thunk": "^2.3.0",
 		"serve-static": "^1.13.2"
