@@ -13,9 +13,9 @@ export default class App extends Component {
 			<Fragment>
 				<ConnectedRouter history={history}>
 					<Switch>
-						<Route path="/" name="Home" component={HomeComponent}/>
-						<Route path="/login" name="Login" component={LoginComponent}/>
-						<Route path="/register" name="Register" component={RegisterComponent}/>
+						<Route exact path="/" name="Home" component={HomeComponent}/>
+						<Route exact path="/login" name="Login" component={LoginComponent}/>
+						<Route exact path="/register" name="Register" component={RegisterComponent}/>
 					</Switch>
 				</ConnectedRouter>
 			</Fragment>
