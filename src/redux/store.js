@@ -1,10 +1,11 @@
 import { applyMiddleware, createStore } from 'redux';
-import createRootReducer from './reducers';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { createBrowserHistory } from 'history';
-import applicationMiddleware from './middleware';
 import { routerMiddleware } from "connected-react-router";
+
+import createRootReducer from './reducers';
+import applicationMiddleware from './middleware';
 
 export const history = createBrowserHistory();
 

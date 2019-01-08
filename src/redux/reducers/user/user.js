@@ -6,7 +6,7 @@ const defaultState = {
 	byCreatedAt: [],
 };
 
-const companyReducer = (state = defaultState, action) => {
+const userReducer = (state = defaultState, action) => {
 	switch (action.type) {
 	case CREATE_USER.SUCCESS:
 		return Object.assign({}, state, {current: action.payload});
@@ -15,4 +15,4 @@ const companyReducer = (state = defaultState, action) => {
 	}
 };
 
-export default companyReducer;
+export default userReducer;
