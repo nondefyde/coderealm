@@ -1,0 +1,25 @@
+.container--height {
+    height: 100vh
+}
+
+.form-auth__title {
+    margin-bottom: 7%;
+    width: 30%
+}
+
+.form-group {
+    width: 75%;
+}
+
+.form-group--top {
+    margin-top: 2%;
+}
+
+.form-auth {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 7%;
+    width: 30%
+}
