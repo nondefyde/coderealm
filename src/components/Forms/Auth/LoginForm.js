@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Button, Col, Form, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import InputField from '../InputFields/TextInput';
-import Progress from '../../../components/Progress';
+import Progress from '../../Progress';
 
 const validate = (values) => {
 	const errors = {};
@@ -27,7 +27,7 @@ const LoginForm = (props) => {
 			<InputGroup className="mb-3">
 				<InputGroupAddon addonType="prepend">
 					<InputGroupText>
-						<i className="fa fa-user"/>
+						<i className="fa fa-envelope"/>
 					</InputGroupText>
 				</InputGroupAddon>
 				<Field name="email" type="email"

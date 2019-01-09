@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Card, CardBody, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
 import LoginForm from '../../../components/Forms/Auth/LoginForm'
-import '../Auth.scss'
+import '../Auth.scss';
 
 
 const propTypes = {
