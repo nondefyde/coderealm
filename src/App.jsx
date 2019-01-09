@@ -1,11 +1,15 @@
 import React, { Component, Fragment } from 'react';
+import 'react-app-polyfill/ie9'; // For IE 9-11 support
+import 'react-app-polyfill/ie11'; // For IE 11 support
+import './polyfill'
+import './App.scss';
 import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-import Route from '../components/Route/Route';
-import HomeComponent from './Home/Home';
-import { history } from '../redux/store';
-import LoginComponent from './Auth/Login/Login';
-import RegisterComponent from './Auth/Register/Register';
+import Route from './components/Route/Route';
+import HomeComponent from './containers/Home/Home';
+import { history } from './redux/store';
+import LoginComponent from './containers/Auth/Login/Login';
+import RegisterComponent from './containers/Auth/Register/Register';
 
 export default class App extends Component {
 	render() {

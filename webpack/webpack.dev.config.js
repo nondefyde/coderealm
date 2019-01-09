@@ -34,13 +34,54 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.(css|scss)$/,
+				test: /\.css$/,
 				use: [
-					"style-loader", // creates style nodes from JS strings
-					"css-loader", // translates CSS into CommonJS
-					"sass-loader" // compiles Sass to CSS, using Node Sass by default
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							importLoaders: 1,
+						}
+					}
 				],
-			}
+			},
+			{
+				test: /\.scss$/,
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							importLoaders: 1,
+						},
+					},
+					{
+						loader: 'sass-loader',
+					}
+				],
+			},
+			{
+				test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+				loader: 'url-loader',
+				options: {
+					limit: 10000,
+					name: 'static/media/[name].[hash:8].[ext]',
+				},
+			},
+			{
+				test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+				use: 'url-loader?limit=10000',
+			},
+			{
+				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+				use: [{
+					loader: 'file-loader',
+					options: {
+						name: '[name].[ext]',
+						outputPath: 'fonts/'
+					}
+				}]
+			},
 		]
 	},
 	devServer: {

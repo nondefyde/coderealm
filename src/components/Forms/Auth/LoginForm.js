@@ -1,7 +1,8 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
-import renderField from './renderField';
-import './style.scss';
+import { Field, reduxForm } from 'redux-form';
+import { Button, Col, Form, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import InputField from '../InputFields/TextInput';
+import Progress from '../../../components/Progress';
 
 const validate = (values) => {
 	const errors = {};
@@ -20,69 +21,39 @@ const validate = (values) => {
 
 
 const LoginForm = (props) => {
-	const { handleSubmit, submitting } = props
+	const {handleSubmit, submitting, formLoading, pristine} = props;
 	return (
-		<div 
-			className="container-fluid d-flex flex-column 
-			justify-content-center align-items-center
-			container--height"
-		>
-			<h2 
-				className="d-flex justify-content-center form-auth__title" 
-			>
-				Code Realm
-			</h2>
-	
-			<form 
-				className="form form-auth border"
-				onSubmit={handleSubmit((value) => console.log('weee', value))}
-			>
-
-				<h5 className="mt-4">Log in</h5>
-				<hr className="w-100 h-1" />
-				<div className="form-group form-group--top d-flex">
-					<button  
-						className="btn flex-fill w-25 btn-primary"
-					>
-						Facebook
-					</button>
-					<button 
-						className="btn border-right border-left flex-fill w-25  ml-1 disabled"
-					>
-						Email
-					</button>
-					<button 
-						className="btn flex-fill w-25 btn-danger"
-					>
-						Google
-					</button>
-				</div>
-				
-				<Field 
-					name="email" 
-					component={renderField} 
-					type="email"
-					placeholder="Email"
-				/>
-
-				<Field 
-					name="password" 
-					component={renderField} 
-					type="password" 
-					placeholder="Password"
-				/>
-				
-				<div className="form-group d-flex">
-					<button 
-						type="submit" 
-						className="btn btn-primary flex-grow-1" 
-						disabled={submitting}
-					>
-						Submit
-					</button>
-				</div>
-			</form>
-		</div>
+		<Form onSubmit={handleSubmit}>
+			<InputGroup className="mb-3">
+				<InputGroupAddon addonType="prepend">
+					<InputGroupText>
+						<i className="fa fa-user"/>
+					</InputGroupText>
+				</InputGroupAddon>
+				<Field name="email" type="email"
+				       disabled={formLoading}
+				       component={InputField} placeholder="name@example.com"/>
+			</InputGroup>
+			<InputGroup className="mb-4">
+				<InputGroupAddon addonType="prepend">
+					<InputGroupText>
+						<i className="fa fa-lock"/>
+					</InputGroupText>
+				</InputGroupAddon>
+				<Field name="password" type="password"
+				       disabled={formLoading}
+				       component={InputField} placeholder="Your Password"/>
+			</InputGroup>
+			<Row>
+				<Col xs="6">
+					<Button color="primary" disabled={formLoading || submitting || pristine}
+					        className="px-4">{formLoading ? <Progress/> : 'Login'}</Button>
+				</Col>
+				<Col xs="6" className="text-right">
+					<Button color="link" className="px-0">Forgot password?</Button>
+				</Col>
+			</Row>
+		</Form>
 	);
 };
 
