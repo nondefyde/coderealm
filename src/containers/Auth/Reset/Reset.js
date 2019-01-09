@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Card, CardBody, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
-import RegisterForm from '../../../components/Forms/Auth/RegisterForm';
+import ResetForm from '../../../components/Forms/Auth/ResetForm';
 import '../Auth.scss';
 
-class RegisterComponent extends Component {
+
+class ResetComponent extends Component {
 
 	constructor(props) {
 		super(props);
@@ -16,8 +17,6 @@ class RegisterComponent extends Component {
 	}
 
 	handleSubmit(values) {
-		// const {register} = this.props;
-		// register(values);
 		console.log('values : ', values);
 	}
 
@@ -32,24 +31,12 @@ class RegisterComponent extends Component {
 							<CardGroup className="main-content">
 								<Card className="p-4">
 									<CardBody>
-										<h1>Register</h1>
-										<p className="text-muted">Sign up for an account</p>
-										<Row className="mb-3 mr-0">
-											<Col md="6" className="pr-0">
-												<Button color="primary" block="true">
-													<i className="fa fa-facebook"> </i> Facebook
-												</Button>
-											</Col>
-											<Col md="6" className="pr-0">
-												<Button color="danger" block="true">
-													<i className="fa fa-google"> </i> Google
-												</Button>
-											</Col>
-										</Row>
-										<RegisterForm onSubmit={this.handleSubmit}/>
+										<h1>Reset</h1>
+										<p className="text-muted">Reset your password</p>
+										<ResetForm onSubmit={this.handleSubmit}/>
 										<FormText color="muted" className="mt-5 text-center"
 										          style={{'font-size': '15px'}}>
-											Already have an account? <Link to="/login">Login Now!</Link>
+											Don't have an account? <Link to="/register">Register</Link>
 										</FormText>
 									</CardBody>
 								</Card>
@@ -62,8 +49,7 @@ class RegisterComponent extends Component {
 	}
 };
 
-
 const dispatchProps = {
 };
 
-export default connect(null, dispatchProps)(RegisterComponent);
+export default connect(null, dispatchProps)(ResetComponent);

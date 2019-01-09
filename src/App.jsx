@@ -10,6 +10,7 @@ import HomeComponent from './containers/Home/Home';
 import { history } from './redux/store';
 import LoginComponent from './containers/Auth/Login/Login';
 import RegisterComponent from './containers/Auth/Register/Register';
+import ResetComponent from './containers/Auth/Reset/Reset';
 
 export default class App extends Component {
 	render() {
@@ -20,6 +21,7 @@ export default class App extends Component {
 						<Route exact path="/" name="Home" component={HomeComponent}/>
 						<Route exact path="/login" name="Login" component={LoginComponent}/>
 						<Route exact path="/register" name="Register" component={RegisterComponent}/>
+						<Route exact path="/reset" name="Reset" component={ResetComponent}/>
 					</Switch>
 				</ConnectedRouter>
 			</Fragment>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 import { Button, Col, Form, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import InputField from '../InputFields/TextInput';
 import Progress from '../../Progress';
@@ -77,9 +78,6 @@ const RegisterForm = (props) => {
 				<Col xs="6">
 					<Button color="primary" disabled={formLoading || submitting || pristine}
 					        className="px-4">{formLoading ? <Progress/> : 'Login'}</Button>
-				</Col>
-				<Col xs="6" className="text-right">
-					<Button color="link" className="px-0">Forgot password?</Button>
 				</Col>
 			</Row>
 		</Form>
