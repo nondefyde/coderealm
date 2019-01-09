@@ -1,0 +1,26 @@
+$header-text-color: rgba(0, 0, 0, 0.5);
+$break-medium: 768px;
+
+.navbar-toggler:not(:disabled):not(.disabled) {
+    outline: none;
+}
+
+@media (min-width: $break-medium) {
+    .navbar-expand-md .navbar-nav .nav-link {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+        outline: none;
+    }
+}
+
+.brand-name {
+    color: $header-text-color;
+
+    &:focus {
+        color: $header-text-color;
+    }
+}
+
+.home-container {
+    max-width: 100%;
+}
