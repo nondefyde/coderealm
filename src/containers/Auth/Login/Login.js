@@ -73,10 +73,6 @@ class LoginComponent extends Component {
 	}
 };
 
-const login = (credentials) => {
-	console.log('credentials : ', credentials);
-};
-
 LoginComponent.propTypes = propTypes;
 LoginComponent.defaultProps = defaultProps;
 
@@ -85,6 +81,5 @@ const stateProps = (state) => ({
 	// isLoggingIn: state.ui.loading['login']
 });
 const dispatchProps = {
-	login,
 };
 export default connect(stateProps, dispatchProps)(LoginComponent);
