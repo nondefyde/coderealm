@@ -77,7 +77,7 @@ const RegisterForm = (props) => {
 			<Row>
 				<Col xs="6">
 					<Button color="primary" disabled={formLoading || submitting || pristine}
-					        className="px-4">{formLoading ? <Progress/> : 'Login'}</Button>
+					        className="btn-block px-4">{formLoading ? <Progress/> : 'Login'}</Button>
 				</Col>
 			</Row>
 		</Form>

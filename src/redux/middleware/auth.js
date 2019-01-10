@@ -10,14 +10,14 @@ const login = ({dispatch}) => (next) => (action) => {
 			method: POST,
 			url: API.LOGIN,
 			key: 'login',
-			nextRoute: APP.HOME,
+			nextRoute: APP.INDEX,
 			onSuccess: LOGIN.SUCCESS,
 			payload: action.payload
 		}));
 	}
 
 	if (action.type === LOGIN.SUCCESS) {
-		console.log('action ', action.payload);
+		console.log('action : ', action.payload);
 	}
 };
 

@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Card, CardBody, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
+import { Button, Card, CardBody, Alert, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
 import { login } from '../../../redux/actions'
+import authService from '../../../services/auth';
 import LoginForm from '../../../components/Forms/Auth/LoginForm'
 import '../Auth.scss';
 
@@ -29,6 +30,7 @@ class LoginComponent extends Component {
 	}
 
 	componentDidMount() {
+		authService.clearUserData();
 	}
 
 	handleSubmit(values) {
@@ -37,7 +39,7 @@ class LoginComponent extends Component {
 	}
 
 	render() {
-		const {isLoggingIn} = this.props;
+		const {isLoggingIn, error} = this.props;
 		return (
 			<div className="">
 				<Container className="main">
@@ -49,14 +51,17 @@ class LoginComponent extends Component {
 									<CardBody>
 										<h1>Login</h1>
 										<p className="text-muted">Sign In to your account</p>
+										{error && <Alert color="danger">
+											{error}
+										</Alert>}
 										<Row className="mb-3 mr-0">
 											<Col md="6" className="pr-0">
-												<Button color="primary" block="true">
+												<Button color="primary" className="btn-block">
 													<i className="fa fa-facebook"> </i> Facebook
 												</Button>
 											</Col>
 											<Col md="6" className="pr-0">
-												<Button color="danger" block="true">
+												<Button color="danger" className="btn-block">
 													<i className="fa fa-google"> </i> Google
 												</Button>
 											</Col>
@@ -64,7 +69,7 @@ class LoginComponent extends Component {
 										<LoginForm initialValues={data}
 										           onSubmit={this.handleSubmit} formLoading={isLoggingIn}/>
 										<FormText color="muted" className="mt-5 text-center"
-										          style={{'font-size': '15px'}}>
+										          style={{fontSize: '15px'}}>
 											Don't have an account? <Link to="/register">Register Now!</Link>
 										</FormText>
 									</CardBody>
@@ -82,7 +87,8 @@ LoginComponent.propTypes = propTypes;
 LoginComponent.defaultProps = defaultProps;
 
 const stateProps = (state) => ({
-	// isLoggingIn: state.ui.loading['login']
+	isLoggingIn: state.ui.loading['login'],
+	error: state.ui.errors['login']
 });
 const dispatchProps = {
 	login,

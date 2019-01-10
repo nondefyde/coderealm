@@ -1,19 +1,7 @@
 import React, { Component } from 'react';
-import {
-	Container,
-	Collapse,
-	Navbar,
-	NavbarToggler,
-	NavbarBrand,
-	Nav,
-	NavItem,
-	NavLink,
-	UncontrolledDropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem
-} from 'reactstrap';
+import { Collapse, Container, Nav, Navbar, NavbarToggler, NavItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import authService from '../../services/auth';
 import './Home.scss';
 
 class HomeComponent extends Component {
@@ -24,6 +12,11 @@ class HomeComponent extends Component {
 			isOpen: false
 		};
 		this.toggle = this.toggle.bind(this);
+	}
+
+	componentDidMount() {
+		const user = authService.getAuthenticatedUser();
+		console.log('user >>>>>>>> : ', user);
 	}
 
 	toggle() {
@@ -37,7 +30,7 @@ class HomeComponent extends Component {
 			<div>
 				<Navbar color="light" light expand="md">
 					<Link to="/" className="nav-link brand-name">Code Realm</Link>
-					<NavbarToggler onClick={this.toggle} />
+					<NavbarToggler onClick={this.toggle}/>
 					<Collapse isOpen={this.state.isOpen} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>

@@ -36,19 +36,19 @@ class RegisterComponent extends Component {
 										<p className="text-muted">Sign up for an account</p>
 										<Row className="mb-3 mr-0">
 											<Col md="6" className="pr-0">
-												<Button color="primary" block="true">
+												<Button color="primary" className="btn-block">
 													<i className="fa fa-facebook"> </i> Facebook
 												</Button>
 											</Col>
 											<Col md="6" className="pr-0">
-												<Button color="danger" block="true">
+												<Button color="danger" className="btn-block">
 													<i className="fa fa-google"> </i> Google
 												</Button>
 											</Col>
 										</Row>
 										<RegisterForm onSubmit={this.handleSubmit}/>
 										<FormText color="muted" className="mt-5 text-center"
-										          style={{'font-size': '15px'}}>
+										          style={{fontSize: '15px'}}>
 											Already have an account? <Link to="/login">Login Now!</Link>
 										</FormText>
 									</CardBody>

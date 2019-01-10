@@ -1,5 +1,8 @@
 import _ from 'lodash';
-import { API_REQUEST } from '../actions';
+import { toast } from 'react-toastify';
+import { push } from 'connected-react-router';
+import { API_REQUEST, updateUserSession } from '../actions';
+import { startUILoading, stopUILoading, uiSetPagination, updateUIError } from '../actions/ui'
 import { createAPIRequest } from '../../services/axios';
 
 export const processApiError = (error) => {
@@ -29,40 +32,39 @@ const apiRequest = ({dispatch}) => (next) => (action) => {
 		if (params && !_.isEmpty(params)) {
 			config.params = params;
 		}
-		// dispatch(startUILoading(key));
+		dispatch(updateUIError(key, null));
+		dispatch(startUILoading(key));
 		createAPIRequest(config)
 			.then((apiResponse) => {
-				console.log('apiResponse ', apiResponse);
 				const {data: payload, _meta} = apiResponse.data;
 				if (onSuccess) {
+					if (_meta && _meta.token) {
+						payload.session = _meta.token;
+					}
 					dispatch({type: onSuccess, payload});
 				}
-				// if (_meta && _meta.token) {
-				//   dispatch(updateUserSession(_meta.token));
-				// }
-				// if (_meta && _meta.pagination) {
-				//   dispatch(uiSetPagination(key, _meta.pagination));
-				// }
-				// dispatch(stopUILoading(key));
-				// if (nextRoute) {
-				//   dispatch(push(nextRoute));
-				// }
-				// if (!noSuccessToast && (successMessage || _meta.message)) {
-				//   toast.info(successMessage || _meta.message);
-				// }
+				if (_meta && _meta.pagination) {
+				  dispatch(uiSetPagination(key, _meta.pagination));
+				}
+				dispatch(stopUILoading(key));
+				if (nextRoute) {
+					dispatch(push(nextRoute));
+				}
+				if (!noSuccessToast && (successMessage || _meta.message)) {
+					toast.info(successMessage || _meta.message);
+				}
 			})
 			.catch((apiError) => {
-				console.log('apiError ', apiError);
-				// dispatch(stopUILoading(key));
-				// const error = _.get(apiError, 'data._meta.error');
-				// const displayedError = processApiError(error) || errorMessage;
-				// dispatch(updateUIError(key, displayedError));
-				// if (!noErrorToast && displayedError) {
-				// 	toast.error(displayedError);
-				// }
-				// if (onError) {
-				// 	dispatch({type: onError});
-				// }
+				dispatch(stopUILoading(key));
+				const error = _.get(apiError, 'data._meta.error');
+				const displayedError = processApiError(error) || errorMessage;
+				dispatch(updateUIError(key, displayedError));
+				if (!noErrorToast && displayedError) {
+					toast.error(displayedError);
+				}
+				if (onError) {
+					dispatch({type: onError});
+				}
 			});
 	}
 	return next(action);

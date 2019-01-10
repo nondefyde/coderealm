@@ -1,5 +1,5 @@
 import get from 'lodash/get';
-import {UI_LOADING, UI_ERROR} from '../../actions/ui'
+import { UI_LOADING, UI_ERROR, UI_SET_PAGINATION } from '../../actions/ui'
 
 const defaultState = {
 	route: get(window.location, 'pathname'),
@@ -16,6 +16,15 @@ const uiReducer = (state = defaultState, action) => {
 		return Object.assign({}, state, {
 			errors: {...state.errors, [action.key]: action.value}
 		});
+	case UI_SET_PAGINATION.START:
+		const {key, payload} = action.meta;
+		return {
+			...state,
+			pagination: {
+				...state.pagination,
+				[key]: payload
+			},
+		};
 	default:
 		return state;
 	}

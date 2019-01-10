@@ -6,6 +6,7 @@ export const UPDATE_USER = createActionType('UPDATE_USER', 'Users');
 export const DELETE_USER = createActionType('DELETE_USER', 'Users');
 export const FETCH_USER = createActionType('FETCH_USER', 'Users');
 export const FETCH_USERS = createActionType('FETCH_USERS', 'Users');
+export const UPDATE_USER_SESSION = '@@ [UPDATE_USER_SESSION]';
 
 export const createUser = (payload) => ({
 	type: CREATE_USER.START,
@@ -30,4 +31,9 @@ export const fetchUser = (id) => ({
 export const fetchUsers = (params = {}) => ({
 	type: FETCH_USERS.START,
 	params
+});
+
+export const updateUserSession = (payload) => ({
+	type: UPDATE_USER_SESSION,
+	payload
 });
