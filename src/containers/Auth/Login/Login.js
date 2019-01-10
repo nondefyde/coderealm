@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Card, CardBody, Alert, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
+import { Alert, Card, CardBody, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
 import { login } from '../../../redux/actions'
 import authService from '../../../services/auth';
 import LoginForm from '../../../components/Forms/Auth/LoginForm'
 import '../Auth.scss';
+import AppSocialButton from '../../../components/Forms/InputFields/Button/SocialButton';
 
 const propTypes = {
 	isLoggingIn: PropTypes.bool,
@@ -38,6 +39,14 @@ class LoginComponent extends Component {
 		login(values);
 	}
 
+	handleSocialLogin(values) {
+		console.log('social values ', values);
+	}
+
+	handleSocialLoginFailure(values) {
+		console.log('social values ', values);
+	}
+
 	render() {
 		const {isLoggingIn, error} = this.props;
 		return (
@@ -56,14 +65,24 @@ class LoginComponent extends Component {
 										</Alert>}
 										<Row className="mb-3 mr-0">
 											<Col md="6" className="pr-0">
-												<Button color="primary" className="btn-block">
+												<AppSocialButton
+													provider='facebook'
+													appId='251667182002096'
+													onLoginSuccess={this.handleSocialLogin}
+													onLoginFailure={this.handleSocialLoginFailure}
+													color="primary" className="btn-block">
 													<i className="fa fa-facebook"> </i> Facebook
-												</Button>
+												</AppSocialButton>
 											</Col>
 											<Col md="6" className="pr-0">
-												<Button color="danger" className="btn-block">
+												<AppSocialButton
+													provider='google'
+													appId='816162144201-pob6o0t7itgcdt6d2nbsdh8mtnln6rjf.apps.googleusercontent.com'
+													onLoginSuccess={this.handleSocialLogin}
+													onLoginFailure={this.handleSocialLoginFailure}
+													color="danger" className="btn-block">
 													<i className="fa fa-google"> </i> Google
-												</Button>
+												</AppSocialButton>
 											</Col>
 										</Row>
 										<LoginForm initialValues={data}
