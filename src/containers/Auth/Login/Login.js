@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Card, CardBody, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
+import { login } from '../../../redux/actions'
 import LoginForm from '../../../components/Forms/Auth/LoginForm'
 import '../Auth.scss';
-
 
 const propTypes = {
 	isLoggingIn: PropTypes.bool,
@@ -14,6 +14,11 @@ const propTypes = {
 
 const defaultProps = {
 	isLoggingIn: false,
+};
+
+const data = {
+	email: "ekaruztest@gmail.com",
+	password: "password"
 };
 
 class LoginComponent extends Component {
@@ -27,9 +32,8 @@ class LoginComponent extends Component {
 	}
 
 	handleSubmit(values) {
-		// const {login} = this.props;
-		// login(values);
-		console.log('values : ', values);
+		const {login} = this.props;
+		login(values);
 	}
 
 	render() {
@@ -57,7 +61,8 @@ class LoginComponent extends Component {
 												</Button>
 											</Col>
 										</Row>
-										<LoginForm onSubmit={this.handleSubmit} formLoading={isLoggingIn}/>
+										<LoginForm initialValues={data}
+										           onSubmit={this.handleSubmit} formLoading={isLoggingIn}/>
 										<FormText color="muted" className="mt-5 text-center"
 										          style={{'font-size': '15px'}}>
 											Don't have an account? <Link to="/register">Register Now!</Link>
@@ -76,10 +81,10 @@ class LoginComponent extends Component {
 LoginComponent.propTypes = propTypes;
 LoginComponent.defaultProps = defaultProps;
 
-
 const stateProps = (state) => ({
 	// isLoggingIn: state.ui.loading['login']
 });
 const dispatchProps = {
+	login,
 };
 export default connect(stateProps, dispatchProps)(LoginComponent);
