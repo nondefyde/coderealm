@@ -53,6 +53,7 @@ const store = createStore(
 // Do on state change
 store.subscribe(() => {
 	const {auth} = store.getState();
+	console.log('auth : ', auth);
 	const cache = {auth};
 	// STORE BASIC DATA NEEDED
 	persistStore(cache);

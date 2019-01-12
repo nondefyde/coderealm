@@ -1,9 +1,8 @@
 import axios from 'axios';
 // Default config options
 const defaultOptions = {
-	baseURL: 'http://coderealm-api.herokuapp.com/api/v1',
-	// baseURL: 'http://192.168.43.206:3000/api/v1/ng',
-	// baseURL: 'http://localhost:3000/api/v1/ng',
+	// baseURL: 'http://coderealm-api.herokuapp.com/api/v1',
+	baseURL: 'http://localhost:3000/api/v1',
 	headers: {
 		'x-api-key': 'hjkdfhgusfkjdgnsdklfgj'
 	},

@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, VERIFY_USER } from '../../actions';
+import { LOGIN, REGISTER, SOCIAL, VERIFY_USER } from '../../actions';
 
 const defaultState = {
 	current: undefined,
@@ -8,6 +8,7 @@ const defaultState = {
 
 const userReducer = (state = defaultState, action) => {
 	switch (action.type) {
+	case SOCIAL.SUCCESS:
 	case LOGIN.SUCCESS:
 	case REGISTER.SUCCESS:
 		return Object.assign({}, state, action.payload);

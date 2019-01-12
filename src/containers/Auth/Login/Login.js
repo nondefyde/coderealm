@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Card, CardBody, Alert, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
-import { login } from '../../../redux/actions';
+import { Alert, Card, CardBody, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
+import { login, social } from '../../../redux/actions';
 import authService from '../../../services/auth';
 import LoginForm from '../../../components/Forms/Auth/LoginForm'
 import '../Auth.scss';
@@ -12,6 +12,7 @@ import AppSocialButton from '../../../components/Forms/InputFields/Button/Social
 const propTypes = {
 	isLoggingIn: PropTypes.bool,
 	login: PropTypes.func.isRequired,
+	social: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -19,8 +20,8 @@ const defaultProps = {
 };
 
 const data = {
-	email: "ekaruztest@gmail.com",
-	password: "password"
+	email: "",
+	password: ""
 };
 
 class LoginComponent extends Component {
@@ -28,6 +29,8 @@ class LoginComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleSocialLogin = this.handleSocialLogin.bind(this);
+		this.handleSocialLoginFailure = this.handleSocialLoginFailure.bind(this);
 	}
 
 	componentDidMount() {
@@ -39,8 +42,11 @@ class LoginComponent extends Component {
 		login(values);
 	}
 
-	handleSocialLogin(values) {
-		console.log('social values ', values);
+	handleSocialLogin({_profile, _provider, _token}) {
+		const {email, id} = _profile;
+		const data = {email, social_id: id, _provider, access_token: _token.accessToken};
+		const {social} = this.props;
+		social(data);
 	}
 
 	handleSocialLoginFailure(values) {
@@ -106,10 +112,11 @@ LoginComponent.propTypes = propTypes;
 LoginComponent.defaultProps = defaultProps;
 
 const stateProps = (state) => ({
-	isLoggingIn: state.ui.loading['login'],
-	error: state.ui.errors['login']
+	isLoggingIn: state.ui.loading['login'] || state.ui.loading['social'],
+	error: state.ui.errors['login'] || state.ui.errors['social']
 });
 const dispatchProps = {
 	login,
+	social,
 };
 export default connect(stateProps, dispatchProps)(LoginComponent);

@@ -10,7 +10,7 @@ class HomeComponent extends Component {
 		super(props);
 		this.state = {
 			isOpen: false,
-			username: ''
+			email: ''
 		};
 		this.toggle = this.toggle.bind(this);
 	}
@@ -18,7 +18,7 @@ class HomeComponent extends Component {
 	componentDidMount() {
 		const user = authService.getAuthenticatedUser();
 		this.setState({
-			username: user.username
+			email: user.email
 		})
 	}
 
@@ -32,8 +32,8 @@ class HomeComponent extends Component {
 		return (
 			<div>
 				<Header
-					username={this.state.username}
-					isloggedIn={authService.isLoggedIn()}
+					email={this.state.email}
+					isLoggedIn={authService.isLoggedIn()}
 					title="Code Realm"
 					onClick={this.toggle}
 					isOpen={this.state.isOpen}

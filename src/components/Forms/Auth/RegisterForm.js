@@ -43,16 +43,6 @@ const RegisterForm = (props) => {
 				       disabled={formLoading}
 				       component={InputField} placeholder="name@example.com"/>
 			</InputGroup>
-			<InputGroup className="mb-3">
-				<InputGroupAddon addonType="prepend">
-					<InputGroupText>
-						<i className="fa fa-user"/>
-					</InputGroupText>
-				</InputGroupAddon>
-				<Field name="username" type="text"
-				       disabled={formLoading}
-				       component={InputField} placeholder="Username"/>
-			</InputGroup>
 			<InputGroup className="mb-4">
 				<InputGroupAddon addonType="prepend">
 					<InputGroupText>
