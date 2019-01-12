@@ -1,5 +1,10 @@
 import React from 'react';
-import { Collapse, Nav, Navbar, NavbarToggler, NavItem } from 'reactstrap';
+import { Collapse, Nav, Navbar,
+	NavbarToggler, NavItem,
+	UncontrolledDropdown,
+	DropdownMenu, DropdownItem,
+	DropdownToggle
+} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 const Header = ({email, title, onClick, isOpen, isLoggedIn, handleClick}) => {
@@ -18,12 +23,20 @@ const Header = ({email, title, onClick, isOpen, isLoggedIn, handleClick}) => {
 						</NavItem>
 					</Nav> :
 					<Nav className="ml-auto" navbar>
-						<NavItem>
-							<Link to="/" className="nav-link">{email}</Link>
-						</NavItem>
-						<NavItem>
-							<a href="" className="nav-link" onClick={handleClick}>Logout</a>
-						</NavItem>
+						<UncontrolledDropdown nav inNavbar>
+							<DropdownToggle nav caret>
+								{email}
+							</DropdownToggle>
+							<DropdownMenu right>
+								<DropdownItem>
+									<Link to="/" className="nav-link">Profile</Link>
+								</DropdownItem>
+								<DropdownItem divider />
+								<DropdownItem>
+									<Link to="/" className="nav-link">Logout</Link>
+								</DropdownItem>
+							</DropdownMenu>
+						</UncontrolledDropdown>
 					</Nav>
 				}
 			</Collapse>
