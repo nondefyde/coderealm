@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Card, CardBody, Alert, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
-import { login } from '../../../redux/actions';
+import { Alert, Card, CardBody, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
+import { login, social } from '../../../redux/actions';
 import authService from '../../../services/auth';
 import LoginForm from '../../../components/Forms/Auth/LoginForm'
 import '../Auth.scss';
+import AppSocialButton from '../../../components/Forms/InputFields/Button/SocialButton';
 
 const propTypes = {
 	isLoggingIn: PropTypes.bool,
 	login: PropTypes.func.isRequired,
+	social: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -18,8 +20,8 @@ const defaultProps = {
 };
 
 const data = {
-	email: "ekaruztest@gmail.com",
-	password: "password"
+	email: "",
+	password: ""
 };
 
 class LoginComponent extends Component {
@@ -27,6 +29,8 @@ class LoginComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleSocialLogin = this.handleSocialLogin.bind(this);
+		this.handleSocialLoginFailure = this.handleSocialLoginFailure.bind(this);
 	}
 
 	componentDidMount() {
@@ -36,6 +40,17 @@ class LoginComponent extends Component {
 	handleSubmit(values) {
 		const {login} = this.props;
 		login(values);
+	}
+
+	handleSocialLogin({_profile, _provider, _token}) {
+		const {email, id} = _profile;
+		const data = {email, social_id: id, _provider, access_token: _token.accessToken};
+		const {social} = this.props;
+		social(data);
+	}
+
+	handleSocialLoginFailure(values) {
+		console.log('social values ', values);
 	}
 
 	render() {
@@ -56,14 +71,24 @@ class LoginComponent extends Component {
 										</Alert>}
 										<Row className="mb-3 mr-0">
 											<Col md="6" className="pr-0">
-												<Button color="primary" className="btn-block">
+												<AppSocialButton
+													provider='facebook'
+													appId='1995581460523595'
+													onLoginSuccess={this.handleSocialLogin}
+													onLoginFailure={this.handleSocialLoginFailure}
+													color="primary" className="btn-block">
 													<i className="fa fa-facebook"> </i> Facebook
-												</Button>
+												</AppSocialButton>
 											</Col>
 											<Col md="6" className="pr-0">
-												<Button color="danger" className="btn-block">
+												<AppSocialButton
+													provider='google'
+													appId='566462880381-7tig94gmc9h2ijo1am8v872hq5t7u5sg.apps.googleusercontent.com'
+													onLoginSuccess={this.handleSocialLogin}
+													onLoginFailure={this.handleSocialLoginFailure}
+													color="danger" className="btn-block">
 													<i className="fa fa-google"> </i> Google
-												</Button>
+												</AppSocialButton>
 											</Col>
 										</Row>
 										<LoginForm initialValues={data}
@@ -87,10 +112,11 @@ LoginComponent.propTypes = propTypes;
 LoginComponent.defaultProps = defaultProps;
 
 const stateProps = (state) => ({
-	isLoggingIn: state.ui.loading['login'],
-	error: state.ui.errors['login']
+	isLoggingIn: state.ui.loading['login'] || state.ui.loading['social'],
+	error: state.ui.errors['login'] || state.ui.errors['social']
 });
 const dispatchProps = {
 	login,
+	social,
 };
 export default connect(stateProps, dispatchProps)(LoginComponent);

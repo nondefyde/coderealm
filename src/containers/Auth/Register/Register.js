@@ -2,16 +2,17 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Card, CardBody, Alert, 
-	CardGroup, Col, Container, FormText, Row } from 'reactstrap';
+import { Alert, Card, CardBody, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
 import RegisterForm from '../../../components/Forms/Auth/RegisterForm';
-import { register } from '../../../redux/actions';
+import { register, social } from '../../../redux/actions';
 import authService from '../../../services/auth';
 import '../Auth.scss';
+import AppSocialButton from '../../../components/Forms/InputFields/Button/SocialButton';
 
 const propTypes = {
 	isLoggingIn: PropTypes.bool,
 	register: PropTypes.func.isRequired,
+	social: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -19,10 +20,9 @@ const defaultProps = {
 };
 
 const data = {
-	email: process.env.default_email,
-	username: process.env.default_username,
-	password: process.env.default_password,
-	confirm_password: process.env.default_change_password 
+	email: "",
+	password: "",
+	confirm_password: ""
 };
 
 class RegisterComponent extends Component {
@@ -30,15 +30,23 @@ class RegisterComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleSocialLogin = this.handleSocialLogin.bind(this);
 	}
 
 	componentDidMount() {
 		authService.clearUserData();
 	}
 
+	handleSocialLogin({_profile, _provider, _token}) {
+		const {email, id} = _profile;
+		const data = {email, social_id: id, _provider, access_token: _token.accessToken};
+		const {social} = this.props;
+		social(data);
+	}
+
 	handleSubmit(values) {
 		const verify_redirect_url = process.env.verify_redirect_url;
-		const regValues = { ...values, verify_redirect_url };
+		const regValues = {...values, verify_redirect_url};
 		const {register} = this.props;
 		register(regValues);
 	}
@@ -62,20 +70,30 @@ class RegisterComponent extends Component {
 										</Alert>}
 										<Row className="mb-3 mr-0">
 											<Col md="6" className="pr-0">
-												<Button color="primary" className="btn-block">
+												<AppSocialButton
+													provider='facebook'
+													appId='1995581460523595'
+													onLoginSuccess={this.handleSocialLogin}
+													onLoginFailure={this.handleSocialLoginFailure}
+													color="primary" className="btn-block">
 													<i className="fa fa-facebook"> </i> Facebook
-												</Button>
+												</AppSocialButton>
 											</Col>
 											<Col md="6" className="pr-0">
-												<Button color="danger" className="btn-block">
+												<AppSocialButton
+													provider='google'
+													appId='566462880381-7tig94gmc9h2ijo1am8v872hq5t7u5sg.apps.googleusercontent.com'
+													onLoginSuccess={this.handleSocialLogin}
+													onLoginFailure={this.handleSocialLoginFailure}
+													color="danger" className="btn-block">
 													<i className="fa fa-google"> </i> Google
-												</Button>
+												</AppSocialButton>
 											</Col>
 										</Row>
 										<RegisterForm
 											initialValues={data}
-											onSubmit={this.handleSubmit}  
-											formLoading={isLoggingIn} 
+											onSubmit={this.handleSubmit}
+											formLoading={isLoggingIn}
 										/>
 										<FormText color="muted" className="mt-5 text-center"
 										          style={{fontSize: '15px'}}>
@@ -92,14 +110,14 @@ class RegisterComponent extends Component {
 	}
 };
 
-
 const stateProps = (state) => ({
-	isLoggingIn: state.ui.loading['register'],
-	error: state.ui.errors['register']
+	isLoggingIn: state.ui.loading['register'] || state.ui.loading['social'],
+	error: state.ui.errors['register'] || state.ui.errors['social']
 });
 
 const dispatchProps = {
 	register,
+	social,
 };
 
 export default connect(stateProps, dispatchProps)(RegisterComponent);

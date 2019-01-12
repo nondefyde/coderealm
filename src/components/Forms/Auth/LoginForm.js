@@ -28,12 +28,12 @@ const LoginForm = (props) => {
 			<InputGroup className="mb-3">
 				<InputGroupAddon addonType="prepend">
 					<InputGroupText>
-						<i className="fa fa-envelope"/>
+						<i className="fa fa-user"/>
 					</InputGroupText>
 				</InputGroupAddon>
 				<Field name="email" type="email"
 				       disabled={formLoading}
-				       component={InputField} placeholder="name@example.com"/>
+				       component={InputField} placeholder="johndoe@example.com"/>
 			</InputGroup>
 			<InputGroup className="mb-4">
 				<InputGroupAddon addonType="prepend">
@@ -43,7 +43,7 @@ const LoginForm = (props) => {
 				</InputGroupAddon>
 				<Field name="password" type="password"
 				       disabled={formLoading}
-				       component={InputField} placeholder="Your Password"/>
+				       component={InputField} placeholder="Password"/>
 			</InputGroup>
 			<Row>
 				<Col xs="6">

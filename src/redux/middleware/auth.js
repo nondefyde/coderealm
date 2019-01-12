@@ -1,7 +1,26 @@
-import { apiRequest, LOGIN, REGISTER } from '../actions/index';
-import { POST } from '../actions';
+import { apiRequest, LOGIN, POST, REGISTER, SOCIAL } from '../actions';
 import API from '../../constants/api';
 import APP from '../../constants/app';
+
+const social = ({dispatch}) => (next) => (action) => {
+	next(action);
+	if (action.type === SOCIAL.START) {
+		const data = action.payload;
+		console.log('data : ', data);
+		dispatch(apiRequest({
+			method: POST,
+			url: `${API.SOCIAL}/${data._provider}`,
+			key: 'social',
+			nextRoute: APP.INDEX,
+			onSuccess: SOCIAL.SUCCESS,
+			payload: data
+		}));
+	}
+
+	if (action.type === LOGIN.SUCCESS) {
+		console.log('action : ', action.payload);
+	}
+};
 
 const login = ({dispatch}) => (next) => (action) => {
 	next(action);
@@ -39,4 +58,5 @@ const register = ({dispatch}) => (next) => (action) => {
 	}
 };
 
-export default [login, register];
+
+export default [social, login, register];
