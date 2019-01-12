@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Alert, Card, CardBody, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
-import { login } from '../../../redux/actions'
+import { Button, Card, CardBody, Alert, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
+import { login } from '../../../redux/actions';
 import authService from '../../../services/auth';
 import LoginForm from '../../../components/Forms/Auth/LoginForm'
 import '../Auth.scss';
