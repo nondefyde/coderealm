@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import authService from '../../services/auth';
 import './Home.scss';
-import Header from '../../components/Header/Header';
+import { Footer, Header } from '../../components/Partials';
 
 class HomeComponent extends Component {
 
@@ -39,6 +39,7 @@ class HomeComponent extends Component {
 					isOpen={this.state.isOpen}
 				/>
 				<Container className="home-container"/>
+				<Footer/>
 			</div>
 		)
 	}

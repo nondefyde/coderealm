@@ -22,7 +22,7 @@ const Header = ({email, title, onClick, isOpen, isLoggedIn, handleClick}) => {
 							<Link to="/" className="nav-link">{email}</Link>
 						</NavItem>
 						<NavItem>
-							<a className="nav-link" onClick={handleClick}>Logout</a>
+							<a href="" className="nav-link" onClick={handleClick}>Logout</a>
 						</NavItem>
 					</Nav>
 				}
