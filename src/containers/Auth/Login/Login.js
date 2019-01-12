@@ -67,7 +67,7 @@ class LoginComponent extends Component {
 											<Col md="6" className="pr-0">
 												<AppSocialButton
 													provider='facebook'
-													appId='251667182002096'
+													appId='1995581460523595'
 													onLoginSuccess={this.handleSocialLogin}
 													onLoginFailure={this.handleSocialLoginFailure}
 													color="primary" className="btn-block">
@@ -77,7 +77,7 @@ class LoginComponent extends Component {
 											<Col md="6" className="pr-0">
 												<AppSocialButton
 													provider='google'
-													appId='816162144201-pob6o0t7itgcdt6d2nbsdh8mtnln6rjf.apps.googleusercontent.com'
+													appId='566462880381-7tig94gmc9h2ijo1am8v872hq5t7u5sg.apps.googleusercontent.com'
 													onLoginSuccess={this.handleSocialLogin}
 													onLoginFailure={this.handleSocialLoginFailure}
 													color="danger" className="btn-block">
