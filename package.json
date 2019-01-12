@@ -24,6 +24,7 @@
 		"bootstrap": "^4.2.1",
 		"classnames": "^2.2.6",
 		"connected-react-router": "^6.1.0",
+		"dotenv-webpack": "^1.6.0",
 		"express": "^4.16.4",
 		"file-loader": "^3.0.1",
 		"font-awesome": "^4.7.0",

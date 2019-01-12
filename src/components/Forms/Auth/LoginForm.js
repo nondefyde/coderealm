@@ -47,7 +47,7 @@ const LoginForm = (props) => {
 			</InputGroup>
 			<Row>
 				<Col xs="6">
-					<Button color="primary" disabled={formLoading || submitting}
+					<Button color="primary" disabled={formLoading || submitting }
 					        className="btn-block px-4">{formLoading ? <Progress/> : 'Login'}</Button>
 				</Col>
 				<Col xs="6" className="text-right">

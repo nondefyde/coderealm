@@ -1,9 +1,29 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Card, CardBody, CardGroup, Col, Container, FormText, Row } from 'reactstrap';
+import { Button, Card, CardBody, Alert, 
+	CardGroup, Col, Container, FormText, Row } from 'reactstrap';
 import RegisterForm from '../../../components/Forms/Auth/RegisterForm';
+import { register } from '../../../redux/actions';
+import authService from '../../../services/auth';
 import '../Auth.scss';
+
+const propTypes = {
+	isLoggingIn: PropTypes.bool,
+	register: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+	isLoggingIn: false,
+};
+
+const data = {
+	email: process.env.default_email,
+	username: process.env.default_username,
+	password: process.env.default_password,
+	confirm_password: process.env.default_change_password 
+};
 
 class RegisterComponent extends Component {
 
@@ -13,15 +33,18 @@ class RegisterComponent extends Component {
 	}
 
 	componentDidMount() {
+		authService.clearUserData();
 	}
 
 	handleSubmit(values) {
-		// const {register} = this.props;
-		// register(values);
-		console.log('values : ', values);
+		const verify_redirect_url = process.env.verify_redirect_url;
+		const regValues = { ...values, verify_redirect_url };
+		const {register} = this.props;
+		register(regValues);
 	}
 
 	render() {
+		const {isLoggingIn, error} = this.props;
 
 		return (
 			<div className="">
@@ -34,6 +57,9 @@ class RegisterComponent extends Component {
 									<CardBody>
 										<h1>Register</h1>
 										<p className="text-muted">Sign up for an account</p>
+										{error && <Alert color="danger">
+											{error}
+										</Alert>}
 										<Row className="mb-3 mr-0">
 											<Col md="6" className="pr-0">
 												<Button color="primary" className="btn-block">
@@ -46,7 +72,11 @@ class RegisterComponent extends Component {
 												</Button>
 											</Col>
 										</Row>
-										<RegisterForm onSubmit={this.handleSubmit}/>
+										<RegisterForm
+											initialValues={data}
+											onSubmit={this.handleSubmit}  
+											formLoading={isLoggingIn} 
+										/>
 										<FormText color="muted" className="mt-5 text-center"
 										          style={{fontSize: '15px'}}>
 											Already have an account? <Link to="/login">Login Now!</Link>
@@ -63,7 +93,13 @@ class RegisterComponent extends Component {
 };
 
 
+const stateProps = (state) => ({
+	isLoggingIn: state.ui.loading['register'],
+	error: state.ui.errors['register']
+});
+
 const dispatchProps = {
+	register,
 };
 
-export default connect(null, dispatchProps)(RegisterComponent);
+export default connect(stateProps, dispatchProps)(RegisterComponent);

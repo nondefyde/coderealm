@@ -32,7 +32,7 @@ const ResetForm = (props) => {
 			<Row>
 				<Col xs="6">
 					<Button color="primary" disabled={formLoading || submitting || pristine}
-					        className="px-4">{formLoading ? <Progress/> : 'Login'}</Button>
+					        className="px-4">{formLoading ? <Progress/> : 'Reset'}</Button>
 				</Col>
 			</Row>
 		</Form>
