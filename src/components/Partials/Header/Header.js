@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const Header = ({email, title, onClick, isOpen, isLoggedIn, handleClick}) => {
 	return (
-		<Navbar color="light" light expand="md">
+		<Navbar color="light" fixed={'top'} light expand="md">
 			<Link to="/" className="nav-link brand-name">{title}</Link>
 			<NavbarToggler onClick={onClick}/>
 			<Collapse isOpen={isOpen} navbar>
@@ -18,6 +18,7 @@ const Header = ({email, title, onClick, isOpen, isLoggedIn, handleClick}) => {
 						<NavItem>
 							<Link to="/register" className="nav-link">Register</Link>
 						</NavItem>
+						<DropdownItem divider />
 						<NavItem>
 							<Link to="/login" className="nav-link">Login</Link>
 						</NavItem>
