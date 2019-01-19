@@ -22,7 +22,8 @@ const defaultProps = {
 const data = {
 	email: "",
 	password: "",
-	confirm_password: ""
+	confirm_password: "",
+	verify_redirect_url: process.env.VERIFY_REDIRECT_URL
 };
 
 class RegisterComponent extends Component {
@@ -47,8 +48,9 @@ class RegisterComponent extends Component {
 	handleSubmit(values) {
 		const verify_redirect_url = process.env.verify_redirect_url;
 		const regValues = {...values, verify_redirect_url};
+		console.log('regValues : ', regValues);
 		const {register} = this.props;
-		register(regValues);
+		// register(regValues);
 	}
 
 	render() {
