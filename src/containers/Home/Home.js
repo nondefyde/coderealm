@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Container } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import authService from '../../services/auth';
 import './Home.scss';
 import { Footer, Header } from '../../components/Partials';
+import { HomeCard, HomeCategory, Search } from '../../components/Partials';
 
 class HomeComponent extends Component {
 
@@ -38,7 +39,31 @@ class HomeComponent extends Component {
 					onClick={this.toggle}
 					isOpen={this.state.isOpen}
 				/>
-				<Container className="home-container"/>
+				<Container className="home-container">
+					<Row className="home-container__row">
+						<Col className="home-container__search">
+							<Search />
+						</Col>
+					</Row>
+					<Row className="home-container__content-row">
+						<Col className="home-container__side-menu">
+							<HomeCategory category={"React"} />
+						</Col>
+						<Col className="home-container__contents">
+							<HomeCard 
+								title={"Card title"}
+								text={"Some quick example text to build on the card title and make up the bulk of the card's content."}
+								image={"https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"}
+							/>
+
+							<HomeCard 
+								title={"Card title"}
+								text={"Some quick example text to build on the card title and make up the bulk of the card's content."}
+								image={"https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"}
+							/>
+						</Col>
+					</Row>
+				</Container>
 				<Footer/>
 			</div>
 		)
