@@ -39,14 +39,14 @@ class LoginComponent extends Component {
 
 	handleSubmit(values) {
 		const {login} = this.props;
-		login(values);
+		// login(values);
 	}
 
 	handleSocialLogin({_profile, _provider, _token}) {
 		const {email, id} = _profile;
 		const data = {email, social_id: id, _provider, access_token: _token.accessToken};
 		const {social} = this.props;
-		social(data);
+		// social(data);
 	}
 
 	handleSocialLoginFailure(values) {

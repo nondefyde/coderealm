@@ -42,11 +42,11 @@ class RegisterComponent extends Component {
 		const {email, id} = _profile;
 		const data = {email, social_id: id, _provider, access_token: _token.accessToken};
 		const {social} = this.props;
-		social(data);
+		// social(data);
 	}
 
 	handleSubmit(values) {
-		const verify_redirect_url = process.env.verify_redirect_url;
+		const verify_redirect_url = process.env.VERIFY_REDIRECT_URL;
 		const regValues = {...values, verify_redirect_url};
 		console.log('regValues : ', regValues);
 		const {register} = this.props;
