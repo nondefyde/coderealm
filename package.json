@@ -30,7 +30,7 @@
 		"font-awesome": "^4.7.0",
 		"history": "^4.7.2",
 		"jwt-decode": "^2.2.0",
-		"lodash": "^4.17.11",
+		"lodash": "^4.17.21",
 		"moment-timezone": "^0.5.23",
 		"node-sass": "^4.11.0",
 		"prop-types": "^15.6.2",
